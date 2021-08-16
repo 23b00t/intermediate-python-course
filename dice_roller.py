@@ -1,18 +1,27 @@
 import random
 def main():
+	dice_players = int(input('How many players want to roll the dice? '))
 	dice_rolls = int(input('How many dice would you like to roll? '))
 	dice_size = int(input('How many sides are the dice? '))
-	dice_sum = 0
-	for i in range(0,dice_rolls):
-		roll = random.randint(1,dice_size)
-		dice_sum += roll
-		if roll == 1:
-			print(f'You rolled a {roll} Critical Fail!')
-		elif roll == dice_size:
-			print(f'You rolled a {roll} Great Success!')
-		else:
-			print(f'You rolled a {roll}')
-	print(f'You have rolled a total of {dice_sum}')
-
+	score = {}
+	for i in range(0,dice_players):
+		dice_sum = 0
+		pnum = i + 1
+		name = input(f'Name of player {pnum}: ')
+		for i in range(0,dice_rolls):
+			roll = random.randint(1,dice_size)
+			dice_sum += roll
+			if roll == 1:
+				print(f'You rolled a {roll} Critical Fail!')
+			elif roll == dice_size:
+				print(f'You rolled a {roll} Great Success!')
+			else:
+				print(f'You rolled a {roll}')
+		print(f'You have rolled a total of {dice_sum}')
+		score[name] = dice_sum
+	from operator import itemgetter
+	#sl = {sorted(score.items(), key=itemgetter(1))}
+	print(sorted(score.items(), key=itemgetter(1)))
+	#print(f'You won the game {list(sl)[-1]}!')
 if __name__== "__main__":
   main()
